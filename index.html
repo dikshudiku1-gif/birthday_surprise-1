@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday, Bestie! 💖</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;text-align:center;color:#fff2f8;
+  font-family:Georgia,serif;
+  background:radial-gradient(ellipse at top,#64264f,#1a0c25 70%);
+  min-height:100vh;
+}
+#intro{
+  position:fixed;inset:0;z-index:5;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px;background:#210e2c;
+  transition:opacity 1s,visibility 1s;
+}
+#intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+.bigheart{font-size:90px;animation:beat 1s infinite}
+@keyframes beat{50%{transform:scale(1.16)}}
+button{
+  border:1px solid #ffd3e7;border-radius:30px;
+  padding:14px 24px;margin:18px 0;
+  color:white;background:linear-gradient(135deg,#ff70b2,#9c397e);
+  font-size:16px;
+}
+h1{font-size:clamp(40px,10vw,66px);margin:20px 0;color:#ffe4f1}
+.gold{color:#ffda8a}
+p{font:16px/1.8 Arial,sans-serif;color:#f4d9e8}
+main{max-width:850px;margin:auto;padding:45px 16px}
+.small{letter-spacing:4px;text-transform:uppercase;color:#ffda8a;font:12px Arial,sans-serif}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0}
+.card{overflow:hidden;border:1px solid #ffd88a55;border-radius:16px;background:#351b3b}
+.card img{width:100%;height:240px;object-fit:cover;display:block}
+.caption{padding:12px;font:14px Arial,sans-serif}
+.letter{margin:32px 0;padding:24px;border:1px solid #ffd88a66;border-radius:18px;background:#ffffff0b}
+.float{position:fixed;bottom:-40px;pointer-events:none;animation:rise 5s linear forwards;z-index:9}
+@keyframes rise{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+footer{padding:20px;color:#c9aec3;font:12px Arial,sans-serif}
+@media(max-width:480px){.card img{height:170px}.gallery{gap:8px}}
+</style>
+</head>
+<body>
+<section id="intro">
+  <div class="bigheart">💖</div>
+  <div class="small">A surprise made just for you</div>
+  <h1>Someone has<br>a wish for you...</h1>
+  <p>Ready for a little birthday magic?</p>
+  <button onclick="openSurprise()">Open Your Surprise ✨</button>
+</section>
+
+<main>
+  <div class="small">A special day for a special person</div>
+  <h1>Happy Birthday,<br><span class="gold">Bestie! 🎂</span></h1>
+  <p>Today is all about you, your smile, and all the beautiful memories we share.</p>
+
+  <div class="small">Our little memories 📸</div>
+  <div class="gallery">
+    <div class="card">
+      <img src="photo1.jpg" alt="Memory one">
+      <div class="caption">One of my favourite memories 💗</div>
+    </div>
+    <div class="card">
+      <img src="photo2.jpg" alt="Memory two">
+      <div class="caption">Partners in all the madness 🫶</div>
+    </div>
+    <div class="card">
+      <img src="photo3.jpg" alt="Memory three">
+      <div class="caption">More laughs to come ✨</div>
+    </div>
+    <div class="card">
+      <img src="photo4.jpg" alt="Memory four">
+      <div class="caption">A friendship to treasure 💞</div>
+    </div>
+  </div>
+
+  <section class="letter">
+    <h2 class="gold">A little message for you 💌</h2>
+    <p>
+      Happy Birthday! Thank you for being such a wonderful friend.
+      I hope this new year brings you happiness, success, peace,
+      and countless reasons to smile. May we make many more
+      unforgettable memories together. Stay amazing, bestie.
+      I'm always cheering for you! ❤️
+    </p>
+    <div class="gold">Your friend, always ✨</div>
+  </section>
+
+  <button onclick="toggleMusic()" id="musicButton">
+    ▶ Play Birthday Music 🎶
+  </button>
+  <audio id="music" src="music.mp3" loop></audio>
+  <footer>Made with 💖 especially for you</footer>
+</main>
+
+<script>
+function hearts(n){
+  const icons=["💖","💕","💗","💘","💞","✨"];
+  for(let i=0;i<n;i++){
+    const h=document.createElement("span");
+    h.className="float";
+    h.textContent=icons[Math.floor(Math.random()*icons.length)];
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(18+Math.random()*25)+"px";
+    h.style.animationDelay=Math.random()+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6500);
+  }
+}
+function openSurprise(){
+  hearts(35);
+  document.getElementById("intro").classList.add("hide");
+}
+setInterval(()=>hearts(2),1200);
+async function toggleMusic(){
+  const m=document.getElementById("music");
+  const b=document.getElementById("musicButton");
+  if(m.paused){
+    try{
+      await m.play();
+      b.textContent="❚❚ Pause Music";
+    }catch(e){
+      alert("Please upload a valid music.mp3 file.");
+    }
+  }else{
+    m.pause();
+    b.textContent="▶ Play Birthday Music 🎶";
+  }
+}
+</script>
+</body>
+</html>
